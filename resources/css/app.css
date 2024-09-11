@@ -3,4 +3,40 @@
     padding:0;
     box-sizing: border-box;
   }
-  
+
+
+#app, html, body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #F9F9F9;
+    font-family: Inter; 
+}  
+
+header {
+    background-color: #FFFFFF;
+    height: 104px;
+    border: 0px 0px 1px 0px;
+    border-color: #F1F1F1;
+}
+
+.headline {
+    font-size: 24px;
+    font-weight: 900;
+    line-height: 29.05px;
+    letter-spacing: -0.02em;  /* Letter -2% */
+}
+
+.headsmall {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 21.78px;
+}
+
+main {
+    flex: 1;
+  }
+
+footer {
+    background-color: #FFFFFF;
+}
