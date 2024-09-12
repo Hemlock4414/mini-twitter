@@ -7,7 +7,7 @@ import { useAuthStore } from "@/store/AuthStore";
 
 
 const router = createRouter({
-    history: createWebHistory(import.meta.env.VITE_BASE_URL),
+    history: createWebHistory("/"),
     routes: [
         {
             path: "/",
@@ -30,7 +30,26 @@ const router = createRouter({
             name: "login",
             component: () => import("../views/LoginView.vue"),
         },
+        {
+            // Hier brauchen wir keine Meta-Informationen, da diese Route für nicht authentifizierte User zugänglich sein soll.
+            path: "/register",
+            name: "register",
+            component: () => import("../views/RegisterView.vue"),
+        },
+        {
+            // Hier brauchen wir keine Meta-Informationen, da diese Route für nicht authentifizierte User zugänglich sein soll.
+            path: "/post/edit/:id",
+            name: "post-edit",
+            component: () => import("../views/PostEditView.vue"),
+        },
+        {
+            // Hier brauchen wir keine Meta-Informationen, da diese Route für nicht authentifizierte User zugänglich sein soll.
+            path: "/post/create",
+            name: "post-create",
+            component: () => import("../views/CreateView.vue"),
+        },
     ],
+
 });
 
 // navigation guard
