@@ -35,7 +35,7 @@ const handleCreate = async () => {
         </div>
 
         <div class="form-wrapper">
-            <div v-if="alertMessage">{{ alertMessage }}</div>
+            <!-- <div v-if="alertMessage">{{ alertMessage }}</div> -->
             <form action="" method="POST" @submit.prevent="handleCreate">
                 <div class="form-group">
                     <label for ="title">Titel</label><br>
@@ -64,7 +64,6 @@ const handleCreate = async () => {
 .text-wrapper {
   width: 768px; /* Gleiche Breite wie der form-wrapper */
   text-align: left;
-  margin-bottom: 20px; /* Abstand zum Formular */
 }
 
 h3 {
@@ -94,10 +93,13 @@ p {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Leichter Schatten */
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
-/* Gestalte die Formularelemente */
+.form-group {
+  margin-bottom: 20px; /* Gleichmäßiger Abstand zwischen den Eingabefeldern */
+}
+
 .form-group label {
   margin-bottom: 4px;
   font-weight: 400;
@@ -124,9 +126,9 @@ button {
   font-size: 14px;
   font-weight: 400;
   line-height: 18px;
-  cursor: pointer;
+  cursor: pointer; 
   text-align: center;
-  gap: 10px;
+  margin-top: 10px; /* Abstand über dem Button */
 }
 
 button:hover {

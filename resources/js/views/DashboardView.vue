@@ -4,6 +4,10 @@ import { ref, onMounted } from 'vue'
 import { storeToRefs } from "pinia";
 import { useAuthStore, authClient } from "@/store/AuthStore";
 import router from "@/router";
+
+import TweetCard from '@/js/components/TweetCard.vue';
+import TweetCard from '../components/TweetCard.vue';
+
 const { authUser } = storeToRefs(useAuthStore());
 const { logout } = useAuthStore();
 
@@ -32,16 +36,18 @@ onMounted( async() => {
 </script>
 
 <template>
-    <div>
-        <h1>Dashboard View</h1>
-        <p>Welcome, {{ authUser.name }}</p>
+    <div> 
+        <p>FEED VON</p>
+        <h1>Willkommen, {{ authUser.name }}</h1>
         <button @click="handleLogout">Logout</button>
     </div>
 
-    <div v-for="post in posts" :key="post.id">
-            <h3>{{ post.title }}</h3>
-            <p>{{ post.content }}</p>
-            <RouterLink :to="{name: 'post-edit', params:{id: post.id}}">Bearbeiten</RouterLink>
-    </div>
+    <TweetCard
+        <div v-for="post in posts" :key="post.id">
+                <h3>{{ post.title }}</h3>
+                <p>{{ post.content }}</p>
+                <RouterLink :to="{name: 'post-edit', params:{id: post.id}}">Bearbeiten</RouterLink>
+        </div>
+    />
 
 </template>

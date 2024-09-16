@@ -34,28 +34,38 @@ const handleRegister = async () => {
 
     <div class="container">
 
-        <h3>Live and Trending</h3>
-        <p>Join now!</p>
+        <div class="text-wrapper">
+            <h3>Live and Trending</h3>
+            <p>Join now!</p>
+        </div>    
 
         <div class="form-wrapper">
             <form action="" method="POST" @submit.prevent="handleRegister">
+                <div class="form-group register">Registrieren</div>
                 <div class="form-group">
                     <label for ="name">Name *</label><br>
-                    <input type="text" id="name" name="name" v-model="name">
+                    <input type="text" id="name" name="name" required v-model="name">
                 </div>
                 <div class="form-group">
                     <label for ="email">E-Mail *</label><br>
-                    <input type="text" id="email" name="email" v-model="email">
+                    <input type="text" id="email" name="email" required v-model="email">
                 </div>
                 <div class="form-group">
                     <label for ="password">Passwort *</label><br>
-                    <input type="password" id="password" name="password" v-model="password">
+                    <input type="password" id="password" name="password" required v-model="password">
                 </div>
                 <div class="form-group">
-                    <label for ="password_confirmation">Passwort Bestätigen *</label><br>
-                    <input type="password" id="password_confirmation" name="password_confirmation" v-model="password_confirmation">
+                    <label for ="password_confirmation">Passwort bestätigen *</label><br>
+                    <input type="password" id="password_confirmation" name="password_confirmation" required v-model="password_confirmation">
                 </div>
-                <button type="submit">Register</button>
+                <div class="registered">
+                    <span>Schon registriert? 
+                        <a href="http://localhost/login"> 
+                            <span class="log_in">Melde dich an</span>
+                        </a>
+                    </span>
+                    <button type="submit">Registrieren</button>
+                </div>
             </form>
         </div>    
     </div>
@@ -69,7 +79,11 @@ const handleRegister = async () => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: start; /* Links ausgerichtet für h3 und p */
+}
+
+.text-wrapper {
+  width: 768px; /* Gleiche Breite wie der form-wrapper */
+  text-align: left;
 }
 
 h3 {
@@ -92,17 +106,28 @@ p {
 .form-wrapper {
   background-color: #FFFFFF;
   max-width: 768px;
-  max-height: 444px;
+  min-height: 444px;
   border-radius: 4px;
   border: solid 1px #F1F1F1;
   padding: 40px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Leichter Schatten */
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
-/* Gestalte die Formularelemente */
+.form-group {
+  margin-bottom: 20px; /* Gleichmäßiger Abstand zwischen den Eingabefeldern */
+}
+
+.register {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 38.73px;
+    color: #222222;
+    margin-bottom: 30px;
+}
+
 .form-group label {
   margin-bottom: 4px;
   font-weight: 400;
@@ -111,7 +136,7 @@ p {
   line-height: 29.05px;
 }
 
-input[type="text"], textarea {
+input[type="text"], input[type="password"], textarea {
   width: 680px;
   padding: 10px;
   border: 1px solid #999999;
@@ -119,8 +144,25 @@ input[type="text"], textarea {
   font-size: 16px;
 }
 
+.registered {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    color: #444444;
+    display: flex;
+    flex-direction: row;
+    margin-top: 15px; 
+    justify-content: space-between;
+}
+
+.log_in {
+    color: #1D9BF0;
+    text-decoration: none !important;
+}
+
+
 button {
-  width: 140px;
+  width: 110px;
   padding: 10px 15px;
   background-color: #1D9BF0;
   color: white;
@@ -131,7 +173,6 @@ button {
   line-height: 18px;
   cursor: pointer;
   text-align: center;
-  gap: 10px;
 }
 
 button:hover {

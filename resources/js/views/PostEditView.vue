@@ -5,6 +5,10 @@ import { authClient } from '@/store/AuthStore';
 
 import { useRoute } from 'vue-router';
 
+import router from "@/router"
+
+import PostButtonDelete from '../components/Button/PostButtonDelete.vue';
+
 const route = useRoute()
 const post_id = route.params.id
 
@@ -16,7 +20,7 @@ const post= ref([])
 const alertMessage = ref("")
 
 // Get Post
-const getPosts = async (id ) => {
+const getPosts = async (id) => {
     const res = await authClient.get(`/api/posts/${id}`)
     post.value = res.data
     title.value = post.value.title
@@ -27,14 +31,19 @@ onMounted(()=>{
   getPosts(post_id)
 })
 
-const handleEdit = async () => {
+const handleUpdate = async (id) => {
     try{
-        const rest = await authClient.post("/api/posts", {
+        const rest = await authClient.put(`/api/posts/${id}`, {
             title: title.value,
             content: content.value
         })
 
-        if(rest.status == 201) alertMessage.value = "Dein Tweet wurde bearbeitet!"
+        if(rest.status == 200) {
+          //alertMessage.value = "Dein Tweet wurde bearbeitet!"
+        router.push("/dashboard")  
+        // Zweite Variante:
+        // router.push({name: "dashboard"})
+        }
 
     } catch(e) {
         alert("Etwas ist schiefgelaufen!");
@@ -55,7 +64,7 @@ const handleEdit = async () => {
 
         <div class="form-wrapper">
             <div v-if="alertMessage">{{ alertMessage }}</div>
-            <form action="" method="POST" @submit.prevent="handleEdit">
+            <form action="" method="POST" @submit.prevent="$event=>handleUpdate(post_id)">
                 <div class="form-group">
                     <label for ="title">Titel</label><br>
                     <input type="text" id="title" name="title" v-model="title">
@@ -64,7 +73,10 @@ const handleEdit = async () => {
                     <label for ="content">Text</label><br>
                     <textarea id="content" name="content" rows="5" v-model="content"></textarea>
                 </div>
-                <button type="submit">Tweet updaten</button>
+                <div class="btns">
+                  <button type="submit">Tweet updaten</button>
+                  <PostButtonDelete type="button" :post_id="post_id" />
+                </div>  
             </form>
         </div>
     </div>
@@ -83,14 +95,23 @@ const handleEdit = async () => {
 .text-wrapper {
   width: 768px; /* Gleiche Breite wie der form-wrapper */
   text-align: left;
-  margin-bottom: 20px; /* Abstand zum Formular */
+  margin-bottom: 60px;
 }
 
 h3 {
-    font-size: 32px;
-    font-weight: 700;
-    line-height: 38.73px;
-    color: #222222;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 38.73px;
+  margin-bottom: 4px;
+  color: #222222;
+}
+
+p {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 29.05px;
+  margin-bottom: 31px;
+  color: #666666;
 }
 
 /* Der Rahmen um das Formular */
@@ -104,10 +125,13 @@ h3 {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Leichter Schatten */
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
-/* Gestalte die Formularelemente */
+.form-group {
+  margin-bottom: 20px; /* Gleichmäßiger Abstand zwischen den Eingabefeldern */
+}
+
 .form-group label {
   margin-bottom: 4px;
   font-weight: 400;
@@ -124,6 +148,12 @@ input[type="text"], textarea {
   font-size: 16px;
 }
 
+.btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 button {
   width: 140px;
   padding: 10px 15px;
@@ -136,7 +166,7 @@ button {
   line-height: 18px;
   cursor: pointer;
   text-align: center;
-  gap: 10px;
+  margin-top: 10px; /* Abstand über dem Button */
 }
 
 button:hover {

@@ -7,8 +7,9 @@ const { authUser } = storeToRefs(useAuthStore());
 
 <template>
     <header>
-
-        <div class="headline">MINI-TWITTER</div>
+        <a href="http://localhost" class="link-div">
+            <div class="headline">MINI-TWITTER</div>
+        </a>    
         <div>
             <nav class="navi">
                 <RouterLink to="/">Home</RouterLink>
@@ -17,7 +18,7 @@ const { authUser } = storeToRefs(useAuthStore());
                 <RouterLink to="/register" v-if="!authUser">Register</RouterLink>
                 <RouterLink to="/edit" v-if="authUser">Tweet bearbeiten</RouterLink>
                 <!-- <RouterLink to="/post/create" v-if="authUser">Tweet erstellen</RouterLink> -->
-                <RouterLink :to="{name: 'post-create'}">Tweet erstellen</RouterLink>
+                <RouterLink :to="{name: 'post-create'}" v-if="authUser">Tweet erstellen</RouterLink>
             </nav>
         </div>
     </header>
@@ -26,9 +27,9 @@ const { authUser } = storeToRefs(useAuthStore());
     <main></main>
 
     <footer>
-        <div>Mini-Twitter built with Laravel</div>
+        <div class="footer-left">Mini-Twitter built with Laravel</div>
 
-        <div>@ Antonio Marrara</div>
+        <div class="footer-right">@ Antonio Marrara</div>
     </footer>
 
 </template>
@@ -54,6 +55,10 @@ header {
     letter-spacing: -0.02em;  /* Letter -2% */
 }
 
+.link-div {
+  text-decoration: none;
+}
+
 .navi {
     display: flex;
     flex-direction: row;
@@ -62,10 +67,6 @@ header {
 
 .navi a {
   margin-right: 20px; /* Fügt rechts zwischen den Links einen Abstand von 20px hinzu */
-}
-
-.navi a:last-child {
-  margin-right: 0; /* Entfernt den rechten Abstand vom letzten Link */
 }
 
 footer {
@@ -81,5 +82,11 @@ footer {
     line-height: 24.2px;
 }
 
+.footer-left {
+    margin-left: 30px;
+}
 
+.footer-right {
+    margin-right: 30px;
+}
 </style>
