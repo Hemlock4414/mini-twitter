@@ -48,6 +48,12 @@ const router = createRouter({
             name: "post-create",
             component: () => import("../views/CreateView.vue"),
         },
+        {
+            // Hier brauchen wir keine Meta-Informationen, da diese Route für nicht authentifizierte User zugänglich sein soll.
+            path: "/post/view/:id",
+            name: "post-view",
+            component: () => import("../views/SingleView.vue"),
+        },
     ],
 
 });

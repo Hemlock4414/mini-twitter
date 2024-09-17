@@ -60,8 +60,8 @@ const handleRegister = async () => {
                 </div>
                 <div class="registered">
                     <span>Schon registriert? 
-                        <a href="http://localhost/login"> 
-                            <span class="log_in">Melde dich an</span>
+                        <a href="http://localhost/login" class="log_in"> 
+                            Melde dich an
                         </a>
                     </span>
                     <button type="submit">Registrieren</button>

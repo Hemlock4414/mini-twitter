@@ -12,13 +12,14 @@ const { authUser } = storeToRefs(useAuthStore());
         </a>    
         <div>
             <nav class="navi">
-                <RouterLink to="/">Home</RouterLink>
-                <RouterLink to="/dashboard" v-if="authUser">Dashboard</RouterLink>
+                <!-- <RouterLink to="/">Home</RouterLink> -->
+                <RouterLink to="/dashboard" v-if="authUser">Meine Tweets</RouterLink>
                 <RouterLink to="/login" v-if="authUser == null">Login</RouterLink>
                 <RouterLink to="/register" v-if="!authUser">Register</RouterLink>
-                <RouterLink to="/edit" v-if="authUser">Tweet bearbeiten</RouterLink>
+                <!-- <RouterLink to="/edit" v-if="authUser">Tweet bearbeiten</RouterLink> -->
                 <!-- <RouterLink to="/post/create" v-if="authUser">Tweet erstellen</RouterLink> -->
-                <RouterLink :to="{name: 'post-create'}" v-if="authUser">Tweet erstellen</RouterLink>
+                <RouterLink :to="{name: 'post-create'}" v-if="authUser" class="special-link">+ Tweet erstellen</RouterLink>
+                <!-- <RouterLink :to="{name: 'post-view'}" v-if="authUser">Tweet ansehen</RouterLink> -->
             </nav>
         </div>
     </header>
@@ -42,7 +43,7 @@ header {
     justify-content: space-around;
     align-items: center;
     background-color: #FFFFFF;
-    height: 104px;
+    min-height: 104px;
     border-bottom: solid 1px #F1F1F1;
     color: #222222;
     margin-bottom: 108px;
@@ -57,16 +58,30 @@ header {
 
 .link-div {
   text-decoration: none;
-}
-
-.navi {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+  color: inherit;
 }
 
 .navi a {
-  margin-right: 20px; /* Fügt rechts zwischen den Links einen Abstand von 20px hinzu */
+  margin-left: 20px; 
+  text-decoration: none;
+  color: #222222;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 21.78px;
+}
+
+.special-link {
+    background-color: #1D9BF0;
+    padding: 10px 15px;
+    border-radius: 50px;
+    width: fit-content;
+    color: #FFFFFF !important;
+    font-size: 16px !important;
+    line-height: 19.36px !important;
+}
+
+.special-link:hover {
+    background-color: #0056b3;;
 }
 
 footer {
@@ -75,7 +90,7 @@ footer {
     justify-content: space-between;
     align-items: center;
     background-color: #FFFFFF;
-    height: 48px;
+    min-height: 48px;
     font-size: 20px;
     color: #222222;
     font-weight: 400;

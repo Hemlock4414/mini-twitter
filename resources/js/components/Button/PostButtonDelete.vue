@@ -24,6 +24,6 @@ const postDelete = async (id) => {
 
 <template>
 
-    <button @click="postDelete(props.post_id)">Löschen</button>
+    <button @click="postDelete(props.post_id)">Tweet löschen</button>
 
 </template>

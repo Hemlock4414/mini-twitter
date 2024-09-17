@@ -31,7 +31,7 @@ const handleCreate = async () => {
 
         <div class="text-wrapper">
             <h3>Tweet erstellen</h3>
-            <p>was möchtest du mitteilen?</p>
+            <p>Was möchtest du mitteilen?</p>
         </div>
 
         <div class="form-wrapper">
