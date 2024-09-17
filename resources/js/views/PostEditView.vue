@@ -75,7 +75,7 @@ const handleUpdate = async (id) => {
                 </div>
                 <div class="btns">
                   <button type="submit">Tweet updaten</button>
-                  <PostButtonDelete type="button" class="deletebtn" :post_id="post_id" />
+                  <PostButtonDelete type="button" :post_id="post_id" />
                 </div>  
             </form>
         </div>
@@ -171,16 +171,6 @@ button {
 
 button:hover {
   background-color: #0056b3;
-}
-
-.deletebtn {
-  background-color: #DF1313;
-  color: #FFFFFF;
-  width: fit-content;
-}
-
-.deletebtn:hover {
-  background-color: #8c0505;
 }
 
 </style>

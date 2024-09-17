@@ -62,7 +62,7 @@ header {
 }
 
 .navi a {
-  margin-left: 20px; 
+  margin-left: 50px; 
   text-decoration: none;
   color: #222222;
   font-size: 18px;

@@ -55,7 +55,7 @@ const formatDate = (dateString) => {
                             <button class="button">Tweet bearbeiten</button>
                 </RouterLink>
 
-                <PostButtonDelete type="button" class="deletebtn" :post_id="post_id" />
+                <PostButtonDelete type="button" :post_id="post_id" />
             </div>
         </div>
     </div>
@@ -127,19 +127,6 @@ button {
 
 button:hover {
   background-color: #888888;
-}
-
-.deletebtn {
-  background-color: #DF1313;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 18px;
-  color: #FFFFFF;
-  width: fit-content;
-}
-
-.deletebtn:hover {
-  background-color: #8c0505;
 }
 
 </style>

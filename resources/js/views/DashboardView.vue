@@ -6,6 +6,7 @@ import { useAuthStore, authClient } from "@/store/AuthStore";
 import router from "@/router";
 
 import TweetCard from '../components/TweetCard.vue';
+import RouterViewButton from '../components/Button/RouterViewButton.vue';
 
 // Pinia Store (authUser und logout aus dem Store)
 const { authUser } = storeToRefs(useAuthStore());
@@ -17,7 +18,7 @@ const handleLogout = () => {
     router.push("/login");
 };
 
-// Funktion, um das Datum in DD.MM.YYYY zu formatieren
+// Funktion, um das Datum in TT.MM.JJJJ zu formatieren
 const formatDate = (dateString) => {
   const date = new Date(dateString);
   const year = date.getFullYear();
@@ -39,12 +40,13 @@ const getPosts = async () => {
     posts.value = response.data
 
     // Datum für jeden Post formatieren
-    posts.value = fetchedPosts.map(post => ({
-    ...post,
-    created_at: formatDate(post.created_at) // Datum formatieren
+    posts.value = response.data.map(post => ({
+        ...post,
+        created_at: formatDate(post.created_at) // Datum formatieren
     }));
-
-    console.log(response);
+    
+    // console.log(response);
+    console.log(posts.value);
 }
 onMounted( async() => {
     getPosts()
@@ -70,9 +72,7 @@ onMounted( async() => {
                 :title="post.title"
                 :text="post.content"
         >        
-                <RouterLink :to="{name: 'post-view', params:{id: post.id}}">
-                    <button class="button">Tweet ansehen</button>
-                </RouterLink> 
+                <RouterViewButton type="button" :post_id="post.id" />
         </TweetCard>
 
     </div>
@@ -128,5 +128,4 @@ button {
 button:hover {
     background-color: #888888;
 }
-
 </style>

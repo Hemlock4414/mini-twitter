@@ -24,6 +24,23 @@ const postDelete = async (id) => {
 
 <template>
 
-    <button @click="postDelete(props.post_id)">Tweet löschen</button>
+    <button @click="postDelete(props.post_id)" class="del-btn">Tweet löschen</button>
 
 </template>
+
+<style scoped>
+
+.del-btn {
+  background-color: #DF1313;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  color: #FFFFFF;
+  width: fit-content;
+}
+
+.del-btn:hover {
+  background-color: #8c0505;
+}
+
+</style>
