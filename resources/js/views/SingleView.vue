@@ -5,8 +5,6 @@ import { authClient } from '@/store/AuthStore';
 
 import { useRoute } from 'vue-router';
 
-import router from "@/router"
-
 import PostButtonDelete from '../components/Button/PostButtonDelete.vue';
 
 const route = useRoute()

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 
@@ -23,6 +24,18 @@ class PostController extends Controller
         // return Post::all();
     }
 
+    public function getMyPost(Request $request) {
+        $posts = Post::where('user_id', '=', $request->user()->id)->get();
+        return response()->json(['posts' => $posts], 200);  
+    }
+    
+    public function getMyUserId(Request $request, $user_name) {
+        $user = User::where('name', '=', $user_name)->first();
+
+        $posts = $$user->posts();
+        return response()->json(['posts' => $posts], 200);  
+    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -37,7 +50,8 @@ class PostController extends Controller
 
             Post::create([
                 'title' => $validated['title'],
-                'content' => $validated['content']
+                'content' => $validated['content'],
+                'user_id' => $request->user()->id
             ]);
 
         return response()->json(['message' => 'Post created successfully'], 201);    
@@ -65,6 +79,10 @@ class PostController extends Controller
 
         $post = Post::findOrFail($id); // Fehlermeldung inklusive
 
+        if($request->user()->id !== $post->user->id) {
+            return response()->json(['message' => 'You are not the owner!'], 402);
+        }
+
         $post->update([
             'title' => $validated['title'],
             'content' => $validated['content']
@@ -81,6 +99,9 @@ class PostController extends Controller
     public function destroy(Request $request, $id)
     {
         $post = Post::findOrFail($id);
+        if($request->user()->id !== $post->user->id) {
+            return response()->json(['message' => 'You are not the owner!'], 402);
+        }
         $post->delete();
         return response()->json(['message' => 'Post deleted successfully'], 204);
     }

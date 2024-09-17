@@ -21,6 +21,10 @@ Route::get('/posts', [PostController::class, 'index']);
 
 Route::post('/posts', [PostController::class, 'store']);
 
+Route::get('/posts/my-posts', [PostController::class, 'getMyPost']);
+
+Route::get('/posts/by-user/{user_id}', [PostController::class, 'getByUserId']);
+
 Route::get('/posts/{id}', [PostController::class, 'show']);
 
 Route::put('/posts/{id}', [PostController::class, 'update']);

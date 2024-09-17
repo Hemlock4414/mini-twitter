@@ -18,14 +18,6 @@ const handleLogout = () => {
     router.push("/login");
 };
 
-// Funktion, um das Datum in TT.MM.JJJJ zu formatieren
-const formatDate = (dateString) => {
-  const date = new Date(dateString);
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0'); // Monate sind 0-basiert, daher +1
-  const day = String(date.getDate()).padStart(2, '0'); // Tag holen und formatieren
-  return `${day}.${month}.${year}`; // Format TT.MM.JJJJ
-};
 
 // Get Posts
 const posts = ref([])
@@ -33,19 +25,18 @@ const posts = ref([])
 const getPosts = async () => {
     const response = await authClient.get("/api/posts")
 
-    
-    // Datum für jeden Post formatieren
-    posts.value = response.data.map(post => ({
-        ...post,
-        created_at: formatDate(post.created_at) // Datum formatieren
-    }));
+/*     const response = await fetch("/api/posts") // mit Fetch als Alternative
+    const data = res.data */
 
-    console.log(posts.value);
+    posts.value = response.data
+
+    console.log(response);
 }
-
-onMounted(() => {
+onMounted( async() => {
     getPosts()
 })
+
+
 </script>
 
 <template>
@@ -65,7 +56,7 @@ onMounted(() => {
                 :title="post.title"
                 :text="post.content"
         >        
-            <RouterViewButton type="button" :post_id="post.id" />
+                <RouterViewButton type="button" :post_id="post.id" />
         </TweetCard>
 
     </div>
