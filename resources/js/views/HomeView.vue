@@ -52,7 +52,7 @@ onMounted(() => {
 <template>
 
     <div class="container">
-        <div class="text-wrapper"> 
+        <div> 
     
         <TweetCard
             v-for="post in posts" :key="post.id"
@@ -71,15 +71,6 @@ onMounted(() => {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-  }
-  
-  .text-wrapper {
-    width: 768px; /* Gleiche Breite wie der form-wrapper */
-    text-align: left;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: 37px;
   }
   
 </style>

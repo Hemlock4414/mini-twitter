@@ -8,6 +8,8 @@ import { useRoute } from 'vue-router';
 import router from "@/router"
 
 import PostButtonDelete from '../components/Button/PostButtonDelete.vue';
+import SubmitButtonUpdate from '../components/Button/SubmitButtonUpdate.vue';
+import AbortButton from '../components/Button/AbortButton.vue';
 
 const route = useRoute()
 const post_id = route.params.id
@@ -18,6 +20,10 @@ const content = ref("");
 const post= ref([])
 
 const alertMessage = ref("")
+
+const handleSubmit = () => {
+  console.log("Form submitted");
+};
 
 // Get Post
 const getPosts = async (id) => {
@@ -50,16 +56,15 @@ const handleUpdate = async (id) => {
         console.log(e);
     }
 }
-
 </script>
 
-
 <template>
-
     <div class="container">
 
         <div class="text-wrapper">
-            <h3>Tweet bearbeiten</h3> 
+
+              <h3>Tweet bearbeiten</h3> 
+              <AbortButton text="Abbrechen" />
         </div>
 
         <div class="form-wrapper">
@@ -74,7 +79,7 @@ const handleUpdate = async (id) => {
                     <textarea id="content" name="content" rows="5" v-model="content"></textarea>
                 </div>
                 <div class="btns">
-                  <button type="submit">Tweet updaten</button>
+                  <SubmitButtonUpdate>Tweet updaten</SubmitButtonUpdate>
                   <PostButtonDelete type="button" :post_id="post_id" />
                 </div>  
             </form>
@@ -96,6 +101,9 @@ const handleUpdate = async (id) => {
   width: 768px; /* Gleiche Breite wie der form-wrapper */
   text-align: left;
   margin-bottom: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 h3 {
@@ -153,24 +161,4 @@ input[type="text"], textarea {
   flex-direction: row;
   justify-content: space-between;
 }
-
-button {
-  width: 140px;
-  padding: 10px 15px;
-  background-color: #1D9BF0;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 18px;
-  cursor: pointer;
-  text-align: center;
-  margin-top: 10px; /* Abstand über dem Button */
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-
 </style>

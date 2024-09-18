@@ -33,7 +33,7 @@ const handleLogout = () => {
                 <!-- <RouterLink :to="{name: 'post-view'}" v-if="authUser">Tweet ansehen</RouterLink> -->
 
                  <!-- Logout Button -->
-                <button class="logout-btn" @click="handleLogout">Logout</button>
+                <button class="logout-btn" @click="handleLogout" v-if="authUser">Logout</button>
             </nav>
         </div>
     </header>

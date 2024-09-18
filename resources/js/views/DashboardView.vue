@@ -5,11 +5,10 @@ import { storeToRefs } from "pinia";
 import { useAuthStore, authClient } from "@/store/AuthStore";
 
 import TweetCard from '../components/TweetCard.vue';
-import RouterViewButton from '../components/Button/RouterViewButton.vue';
+import PostViewButton from '../components/Button/PostViewButton.vue';
 
 // Pinia Store (authUser und logout aus dem Store)
 const { authUser } = storeToRefs(useAuthStore());
-const { logout } = useAuthStore();
 
 // Funktion, um das Datum in TT.MM.JJJJ zu formatieren
 const formatDate = (dateString) => {
@@ -59,7 +58,7 @@ onMounted(() => {
                 :title="post.title"
                 :text="post.content"
         >        
-            <RouterViewButton type="button" :post_id="post.id" />
+            <PostViewButton type="button" :post_id="post.id" />
         </TweetCard>
 
     </div>

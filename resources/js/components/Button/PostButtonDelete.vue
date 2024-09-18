@@ -35,8 +35,12 @@ const postDelete = async (id) => {
   font-size: 14px;
   font-weight: 400;
   line-height: 18px;
+  padding: 10px 15px;
+  border-radius: 8px;
   color: #FFFFFF;
   width: fit-content;
+  cursor: pointer;
+  text-align: center;
 }
 
 .del-btn:hover {
