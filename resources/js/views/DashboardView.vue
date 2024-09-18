@@ -3,7 +3,6 @@ import { ref, onMounted } from 'vue'
 
 import { storeToRefs } from "pinia";
 import { useAuthStore, authClient } from "@/store/AuthStore";
-import router from "@/router";
 
 import TweetCard from '../components/TweetCard.vue';
 import RouterViewButton from '../components/Button/RouterViewButton.vue';
@@ -11,12 +10,6 @@ import RouterViewButton from '../components/Button/RouterViewButton.vue';
 // Pinia Store (authUser und logout aus dem Store)
 const { authUser } = storeToRefs(useAuthStore());
 const { logout } = useAuthStore();
-
-// Handle Logout
-const handleLogout = () => {
-    logout();
-    router.push("/login");
-};
 
 // Funktion, um das Datum in TT.MM.JJJJ zu formatieren
 const formatDate = (dateString) => {
@@ -33,7 +26,9 @@ const posts = ref([])
 const getPosts = async () => {
     const response = await authClient.get("/api/posts")
 
-    
+/*     const response = await fetch("/api/posts") // mit Fetch als Alternative
+    const data = res.data */
+
     // Datum für jeden Post formatieren
     posts.value = response.data.map(post => ({
         ...post,
@@ -42,10 +37,10 @@ const getPosts = async () => {
 
     console.log(posts.value);
 }
-
 onMounted(() => {
     getPosts()
 })
+
 </script>
 
 <template>
@@ -56,7 +51,6 @@ onMounted(() => {
                 <p>FEED VON</p>
                 <h3>{{ authUser.name }}</h3> 
             </div>    
-            <button class="button" @click="handleLogout">Logout</button>
         </div>
 
         <TweetCard
@@ -105,20 +99,4 @@ p {
   color: #888888;
 }
 
-button {
-    width: fit-content;
-    height: fit-content;
-    padding: 10px 15px;
-    font-size: 16px;
-    font-weight: 900;
-    border-radius: 8px;
-    background-color: #222222;
-    color: #FFFFFF;
-    text-align: center;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #888888;
-}
 </style>

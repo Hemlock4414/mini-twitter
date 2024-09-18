@@ -48,7 +48,7 @@ const handleLogin = async () => {
                 <div class="registered">
                     <span>Noch keinen Account? 
                         <a href="http://localhost/register" class="log_in"> 
-                            Registriere dich
+                            Registrieren
                         </a>
                     </span>
                     <button type="submit">Anmelden</button>

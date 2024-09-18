@@ -18,7 +18,6 @@ const handleLogout = () => {
     router.push("/login");
 };
 
-
 // Get Posts
 const posts = ref([])
 
@@ -28,7 +27,7 @@ const getPosts = async () => {
 /*     const response = await fetch("/api/posts") // mit Fetch als Alternative
     const data = res.data */
 
-    posts.value = response.data
+    // posts.value = response.data
 
     console.log(response);
 }

@@ -1,8 +1,19 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
-import { useAuthStore } from "./store/AuthStore";
+
+// Importiere die Logout-Funktion und Router
 import { storeToRefs } from "pinia";
+import { useAuthStore } from "@/store/AuthStore";
+import router from "@/router";
+
 const { authUser } = storeToRefs(useAuthStore());
+const { logout } = useAuthStore();
+
+// Handle Logout
+const handleLogout = () => {
+    logout();
+    router.push("/login");
+};
 </script>
 
 <template>
@@ -20,6 +31,9 @@ const { authUser } = storeToRefs(useAuthStore());
                 <!-- <RouterLink to="/post/create" v-if="authUser">Tweet erstellen</RouterLink> -->
                 <RouterLink :to="{name: 'post-create'}" v-if="authUser" class="special-link">+ Tweet erstellen</RouterLink>
                 <!-- <RouterLink :to="{name: 'post-view'}" v-if="authUser">Tweet ansehen</RouterLink> -->
+
+                 <!-- Logout Button -->
+                <button class="logout-btn" @click="handleLogout">Logout</button>
             </nav>
         </div>
     </header>
@@ -82,6 +96,24 @@ header {
 
 .special-link:hover {
     background-color: #0056b3;;
+}
+
+.logout-btn {
+    width: fit-content;
+    height: fit-content;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: 900;
+    border-radius: 8px;
+    background-color: #222222;
+    color: #FFFFFF;
+    text-align: center;
+    cursor: pointer;
+    margin-left: 50px;
+}
+
+.logout-btn:hover {
+    background-color: #888888;
 }
 
 footer {
