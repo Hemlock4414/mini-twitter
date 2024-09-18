@@ -6,6 +6,14 @@ import { storeToRefs } from "pinia";
 import { useAuthStore } from "@/store/AuthStore";
 import router from "@/router";
 
+import { ref } from 'vue';
+
+const menuOpen = ref(false);
+
+const toggleMenu = () => {
+  menuOpen.value = !menuOpen.value;
+};
+
 const { authUser } = storeToRefs(useAuthStore());
 const { logout } = useAuthStore();
 
@@ -20,8 +28,9 @@ const handleLogout = () => {
     <header>
         <a href="http://localhost" class="link-div">
             <div class="headline">MINI-TWITTER</div>
-        </a>    
-        <div>
+        </a>  
+        <!-- <button class="menu-btn" @click="toggleMenu">☰</button>   -->
+        <div>        <!-- <div v-if="menuOpen"> -->
             <nav class="navi">
                 <!-- <RouterLink to="/">Home</RouterLink> -->
                 <RouterLink to="/dashboard" v-if="authUser">Meine Tweets</RouterLink>
@@ -42,14 +51,15 @@ const handleLogout = () => {
     <main></main>
 
     <footer>
-        <div class="footer-left">Mini-Twitter built with Laravel</div>
+        <div>Mini-Twitter built with Laravel</div>
 
-        <div class="footer-right">@ Antonio Marrara</div>
+        <div>@ Antonio Marrara</div>
     </footer>
 
 </template>
 
 <style scoped>
+
 
 header {
     display: flex;
@@ -116,6 +126,30 @@ header {
     background-color: #888888;
 }
 
+/* .menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .menu-btn {
+    display: block;
+  }
+
+  .navi {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .menu-btn.active + .navi {
+    display: flex;
+  }
+} */
+
 footer {
     display: flex;
     flex-direction: row;
@@ -127,13 +161,16 @@ footer {
     color: #222222;
     font-weight: 400;
     line-height: 24.2px;
+    padding: 0 30px;
 }
 
-.footer-left {
-    margin-left: 30px;
+@media (max-width: 600px) {
+    footer {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 10px;
+    }
 }
 
-.footer-right {
-    margin-right: 30px;
-}
 </style>

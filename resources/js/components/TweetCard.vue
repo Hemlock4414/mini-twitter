@@ -39,7 +39,14 @@ const props = defineProps({
 .form-group {
   padding: 17px 21px 27px 37px;  
   min-height: 100px;
+  width: 100%;
 }
+
+/* @media (max-width: 768px) {
+  .form-wrapper {
+    max-width: 768px;
+}
+} */
 
 .date {
     font-size: 14px;
