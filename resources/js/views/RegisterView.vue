@@ -1,63 +1,74 @@
 <script setup>
 
+import { ref } from "vue";
+import { useAuthStore } from "@/store/AuthStore";
 import router from "@/router";
 
-// refs verwenden wir um die Daten zu binden um sie reaktiv zu machen
-import { ref } from "vue";
+const { register, getAuthUser } = useAuthStore(); 
 
-// wir importieren den AuthStore damit wir die Authentifizierung durchführen können
-
-import { useAuthStore } from "@/store/AuthStore";
-
-// wir holen uns die login und getAuthUser Funktionen aus dem Store
-const { login, getAuthUser } = useAuthStore(); 
-// für das v-model binding, siehe unten im template und wir verwenden anschliessen im handleLogin die email.value
+const name = ref("");
 const email = ref("");
 const password = ref("");
+const password_confirmation = ref("");
 
-const handleLogin = async () => {
-    // wir geben die email und password Werte an die login Funktion in unserem Store weiter
-    await login({ email: email.value, password: password.value });
+const handleRegister = async () => {
+    const respReg = await register(
+        {
+            name: name.value,
+            email: email.value,
+            password: password.value,
+            password_confirmation: password_confirmation.value
+        }
+    )
+    if (respReg.status !== 201) {
+        return alert("something went wrong")
+    }  
 
-    // nach dem Login holen wir uns den authentifizierten User um ihn im Store zu speichern
-    const res = await getAuthUser();
+    const resUser = await getAuthUser();
 
-    // wenn der Status 200 ist, leiten wir den Benutzer auf die Dashboard-Seite weiter
-    if (res.status === 200) router.push("/dashboard");
-};
+    if (resUser.status === 200) router.push("/dashboard");
+}
 </script>
+
 <template>
+
     <div class="container">
 
         <div class="text-wrapper">
             <h3>Live and Trending</h3>
-            <p>Welcome back!</p>
+            <p>Join now!</p>
         </div>    
 
         <div class="form-wrapper">
-            <form @submit.prevent="handleLogin">
-                <div class="form-group login">Login</div>
+            <form action="" method="POST" @submit.prevent="handleRegister">
+                <div class="form-group register">Registrieren</div>
+                <div class="form-group">
+                    <label for ="name">Name *</label><br>
+                    <input type="text" id="name" name="name" required v-model="name">
+                </div>
                 <div class="form-group">
                     <label for ="email">E-Mail *</label><br>
-                    <input type="text" id="email" name="email" v-model="email">
+                    <input type="text" id="email" name="email" required v-model="email">
                 </div>
                 <div class="form-group">
                     <label for ="password">Passwort *</label><br>
-                    <input type="password" id="password" name="password" v-model="password">
+                    <input type="password" id="password" name="password" required v-model="password">
+                </div>
+                <div class="form-group">
+                    <label for ="password_confirmation">Passwort bestätigen *</label><br>
+                    <input type="password" id="password_confirmation" name="password_confirmation" required v-model="password_confirmation">
                 </div>
                 <div class="registered">
-                    <span>Noch keinen Account? 
-                        <a href="http://localhost/register" class="log_in"> 
-                            Registrieren
+                    <span>Schon registriert? 
+                        <a href="http://localhost/login" class="log_in"> 
+                            Melde dich an
                         </a>
                     </span>
-                    <button type="submit">Anmelden</button>
+                    <button type="submit">Registrieren</button>
                 </div>
             </form>
-        </div>
+        </div>    
     </div>
-
-
 
 </template>
 
@@ -95,7 +106,7 @@ p {
 .form-wrapper {
   background-color: #FFFFFF;
   max-width: 768px;
-  max-height: 444px;
+  min-height: 444px;
   border-radius: 4px;
   border: solid 1px #F1F1F1;
   padding: 40px;
@@ -109,7 +120,7 @@ p {
   margin-bottom: 20px; /* Gleichmäßiger Abstand zwischen den Eingabefeldern */
 }
 
-.login {
+.register {
     font-size: 32px;
     font-weight: 700;
     line-height: 38.73px;
@@ -125,7 +136,7 @@ p {
   line-height: 29.05px;
 }
 
-input[type="text"], input[type="password"] {
+input[type="text"], input[type="password"], textarea {
   width: 680px;
   padding: 10px;
   border: 1px solid #999999;
@@ -151,7 +162,7 @@ input[type="text"], input[type="password"] {
 
 
 button {
-  width: 100px;
+  width: 110px;
   padding: 10px 15px;
   background-color: #1D9BF0;
   color: white;
