@@ -74,10 +74,6 @@ const handleCreate = async () => {
   justify-content: space-between;
 }
 
-.abort-btn {
-  height: fit-content;
-}
-
 h3 {
     font-size: 32px;
     font-weight: 700;

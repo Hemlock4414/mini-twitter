@@ -27,6 +27,7 @@ const handleClick = () => {
 
 .abort-btn {
   width: fit-content;
+  height: fit-content;
   padding: 10px 15px;
   background-color: #29b73c;
   color: white;
