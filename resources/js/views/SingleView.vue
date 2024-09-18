@@ -5,9 +5,9 @@ import { authClient } from '@/store/AuthStore';
 
 import { useRoute } from 'vue-router';
 
-import router from "@/router"
-
 import PostButtonDelete from '../components/Button/PostButtonDelete.vue';
+import PostButtonEdit from '../components/Button/PostButtonEdit.vue';
+import AbortButton from '../components/Button/AbortButton.vue';
 
 const route = useRoute()
 const post_id = route.params.id
@@ -44,18 +44,19 @@ const formatDate = (dateString) => {
     <div class="container">
 
         <div class="form-wrapper">
-            <div class="tweet-date">TWEET VOM {{ formatDate(post.created_at) }}</div>
+            <div class="top">
+              <div class="tweet-date">TWEET VOM {{ formatDate(post.created_at) }}</div>
 
+              <AbortButton />
+            </div>
             <div class="title">{{ post.title }}</div>
 
             <div class="text">{{ post.content }}</div>
 
             <div class="btns">
-                <RouterLink :to="{name: 'post-edit', params:{id: post.id}}">
-                            <button class="button">Tweet bearbeiten</button>
-                </RouterLink>
+              <PostButtonEdit type="button" :post_id="post.id" />
 
-                <PostButtonDelete type="button" :post_id="post_id" />
+              <PostButtonDelete type="button" :post_id="post_id" />
             </div>
         </div>
     </div>
@@ -79,6 +80,12 @@ const formatDate = (dateString) => {
   display: flex;
   flex-direction: column;
   margin-bottom: 8px;
+}
+
+.top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .tweet-date {
@@ -110,23 +117,6 @@ const formatDate = (dateString) => {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-}
-
-button {
-  background-color: #222222;
-  padding: 10px 15px;
-  border-radius: 8px;
-  color: #FFFFFF;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 18px;
-  width: fit-content;
-  cursor: pointer;
-  text-align: center;
-}
-
-button:hover {
-  background-color: #888888;
 }
 
 </style>

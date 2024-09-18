@@ -3,20 +3,19 @@ import { ref, onMounted } from 'vue'
 
 import { storeToRefs } from "pinia";
 import { useAuthStore, authClient } from "@/store/AuthStore";
+import router from "@/router";
 
 import TweetCard from '../components/TweetCard.vue';
-import PostViewButton from '../components/Button/PostViewButton.vue';
+import RouterViewButton from '../components/Button/RouterViewButton.vue';
 
 // Pinia Store (authUser und logout aus dem Store)
 const { authUser } = storeToRefs(useAuthStore());
+const { logout } = useAuthStore();
 
-// Funktion, um das Datum in TT.MM.JJJJ zu formatieren
-const formatDate = (dateString) => {
-  const date = new Date(dateString);
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0'); // Monate sind 0-basiert, daher +1
-  const day = String(date.getDate()).padStart(2, '0'); // Tag holen und formatieren
-  return `${day}.${month}.${year}`; // Format TT.MM.JJJJ
+// Handle Logout
+const handleLogout = () => {
+    logout();
+    router.push("/login");
 };
 
 // Get Posts
@@ -28,17 +27,14 @@ const getPosts = async () => {
 /*     const response = await fetch("/api/posts") // mit Fetch als Alternative
     const data = res.data */
 
-    // Datum für jeden Post formatieren
-    posts.value = response.data.map(post => ({
-        ...post,
-        created_at: formatDate(post.created_at) // Datum formatieren
-    }));
+    // posts.value = response.data
 
-    console.log(posts.value);
+    console.log(response);
 }
-onMounted(() => {
+onMounted( async() => {
     getPosts()
 })
+
 
 </script>
 
@@ -50,6 +46,7 @@ onMounted(() => {
                 <p>FEED VON</p>
                 <h3>{{ authUser.name }}</h3> 
             </div>    
+            <button class="button" @click="handleLogout">Logout</button>
         </div>
 
         <TweetCard
@@ -58,7 +55,7 @@ onMounted(() => {
                 :title="post.title"
                 :text="post.content"
         >        
-            <PostViewButton type="button" :post_id="post.id" />
+                <RouterViewButton type="button" :post_id="post.id" />
         </TweetCard>
 
     </div>
@@ -98,4 +95,20 @@ p {
   color: #888888;
 }
 
+button {
+    width: fit-content;
+    height: fit-content;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: 900;
+    border-radius: 8px;
+    background-color: #222222;
+    color: #FFFFFF;
+    text-align: center;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #888888;
+}
 </style>

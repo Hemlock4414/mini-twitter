@@ -6,15 +6,6 @@ const props = defineProps({
   text: String
 });
 
-// Funktion, um das Datum in YYYY-MM-DD zu formatieren
-const formatDate = (dateString) => {
-  const date = new Date(dateString);
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0'); // Monate sind 0-basiert, daher +1
-  const day = String(date.getDate()).padStart(2, '0'); // Tag holen und formatieren
-  return `${year}-${month}-${day}`; // Format YYYY-MM-DD
-};
-
 </script>
 
 <template>
@@ -22,7 +13,7 @@ const formatDate = (dateString) => {
     <div class="form-wrapper">
 
         <div class="form-group">
-            <div class="date">{{ formatDate(props.date) }}</div>
+            <div class="date">{{ props.date }}</div>
             <div class="title">{{ props.title }}</div>
             <div class="text">{{ props.text }}</div>
             <slot></slot>
@@ -48,7 +39,14 @@ const formatDate = (dateString) => {
 .form-group {
   padding: 17px 21px 27px 37px;  
   min-height: 100px;
+  width: 100%;
 }
+
+/* @media (max-width: 768px) {
+  .form-wrapper {
+    max-width: 768px;
+}
+} */
 
 .date {
     font-size: 14px;

@@ -3,6 +3,8 @@
 import { ref } from 'vue';
 import { authClient } from '@/store/AuthStore';
 
+import AbortButton from '../components/Button/AbortButton.vue';
+
 const title = ref("");
 const content = ref("");
 const alertMessage = ref("")
@@ -30,8 +32,11 @@ const handleCreate = async () => {
     <div class="container">
 
         <div class="text-wrapper">
-            <h3>Tweet erstellen</h3>
-            <p>Was möchtest du mitteilen?</p>
+            <div>
+              <h3>Tweet erstellen</h3>
+              <p>Was möchtest du mitteilen?</p>
+            </div> 
+            <AbortButton text="Abbrechen" />
         </div>
 
         <div class="form-wrapper">
@@ -64,6 +69,13 @@ const handleCreate = async () => {
 .text-wrapper {
   width: 768px; /* Gleiche Breite wie der form-wrapper */
   text-align: left;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.abort-btn {
+  height: fit-content;
 }
 
 h3 {

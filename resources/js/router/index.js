@@ -40,7 +40,7 @@ const router = createRouter({
             // Hier brauchen wir keine Meta-Informationen, da diese Route für nicht authentifizierte User zugänglich sein soll.
             path: "/post/edit/:id",
             name: "post-edit",
-            component: () => import("../views/PostEditView.vue"),
+            component: () => import("../views/EditView.vue"),
         },
         {
             // Hier brauchen wir keine Meta-Informationen, da diese Route für nicht authentifizierte User zugänglich sein soll.
