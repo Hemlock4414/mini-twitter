@@ -11,5 +11,10 @@ https://www.figma.com/design/3AO216bDpIIubHvfAtRqCI/Mini-Twitter?node-id=0-1&nod
 
 ## Anforderungen
 
-Alle Required-Anforderungen wurden erfüllt. Praktisch alle Buttons wurden zu Komponenten umgewandelt. Zwei Buttons wurden hinzugefügt, nämlich ein Logout-Button in der Navbar und ein Zurück/Abbrechen-Button wo er sinnvoll eingesetzt werden konnte.
+Figma-Vorlage wurde nachgebaut. Alle Required-Anforderungen wurden erfüllt. Praktisch alle Buttons wurden zu Komponenten umgewandelt. 
+Zwei Buttons wurden aus Eigeninitiative hinzugefügt, nämlich ein Logout-Button in der Navbar und ein Zurück/Abbrechen-Button wo er sinnvoll eingesetzt werden konnte.
 
+## Login-Daten
+
+email: bla@vla.ch
+pw: 12341234
