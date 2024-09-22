@@ -4,6 +4,7 @@ import { ref } from 'vue';
 import { authClient } from '@/store/AuthStore';
 
 import AbortButton from '../components/Button/AbortButton.vue';
+import SubmitButton from '../components/Button/SubmitButton.vue';
 
 const title = ref("");
 const content = ref("");
@@ -39,7 +40,7 @@ const handleCreate = async () => {
             <AbortButton text="Abbrechen" />
         </div>
 
-        <div class="form-wrapper">
+        <div class="form-wrap">
             <!-- <div v-if="alertMessage">{{ alertMessage }}</div> -->
             <form action="" method="POST" @submit.prevent="handleCreate">
                 <div class="form-group">
@@ -50,7 +51,7 @@ const handleCreate = async () => {
                     <label for ="content">Text</label><br>
                     <textarea id="content" name="content" rows="5" v-model="content"></textarea>
                 </div>
-                <button type="submit">Tweet speichern</button>
+                <SubmitButton>Tweet speichern</SubmitButton>
             </form>
         </div>
     </div>
@@ -67,7 +68,8 @@ const handleCreate = async () => {
 }
 
 .text-wrapper {
-  width: 768px; /* Gleiche Breite wie der form-wrapper */
+  max-width: 768px; /* Gleiche Breite wie der form-wrapper */
+  width: 100%;
   text-align: left;
   display: flex;
   flex-direction: row;
@@ -91,9 +93,10 @@ p {
 }
 
 /* Der Rahmen um das Formular */
-.form-wrapper {
+.form-wrap {
   background-color: #FFFFFF;
   max-width: 768px;
+  width: 100%;
   max-height: 444px;
   border-radius: 4px;
   border: solid 1px #F1F1F1;
@@ -102,6 +105,12 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+}
+
+@media (max-width: 768px) {
+  .container {
+    margin: 0 10px;
+  }
 }
 
 .form-group {
@@ -117,29 +126,11 @@ p {
 }
 
 input[type="text"], textarea {
-  width: 680px;
+  width: 100%;
   padding: 10px;
   border: 1px solid #999999;
   border-radius: 4px;
   font-size: 16px;
 }
 
-button {
-  width: 140px;
-  padding: 10px 15px;
-  background-color: #1D9BF0;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 18px;
-  cursor: pointer; 
-  text-align: center;
-  margin-top: 10px; /* Abstand über dem Button */
-}
-
-button:hover {
-  background-color: #0056b3;
-}
 </style>

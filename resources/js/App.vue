@@ -8,12 +8,7 @@ import router from "@/router";
 
 import { ref } from 'vue';
 
-const menuOpen = ref(false);
-
-const toggleMenu = () => {
-  menuOpen.value = !menuOpen.value;
-};
-
+const isActive = ref(false);
 const { authUser } = storeToRefs(useAuthStore());
 const { logout } = useAuthStore();
 
@@ -29,9 +24,8 @@ const handleLogout = () => {
         <a href="http://localhost" class="link-div">
             <div class="headline">MINI-TWITTER</div>
         </a>  
-        <!-- <button class="menu-btn" @click="toggleMenu">☰</button>   -->
-        <div>        <!-- <div v-if="menuOpen"> -->
-            <nav class="navi">
+        <button class="menu-btn" @click="isActive = !isActive">☰</button>
+            <nav :class="['navi', { active: isActive }]">
                 <!-- <RouterLink to="/">Home</RouterLink> -->
                 <RouterLink to="/dashboard" v-if="authUser">Meine Tweets</RouterLink>
                 <RouterLink to="/login" v-if="authUser == null">Login</RouterLink>
@@ -44,7 +38,6 @@ const handleLogout = () => {
                  <!-- Logout Button -->
                 <button class="logout-btn" @click="handleLogout" v-if="authUser">Logout</button>
             </nav>
-        </div>
     </header>
     <RouterView />
 
@@ -71,6 +64,12 @@ header {
     border-bottom: solid 1px #F1F1F1;
     color: #222222;
     margin-bottom: 108px;
+}
+
+@media (max-width: 600px) {
+  header {
+    justify-content: space-evenly;
+  }
 }
 
 .headline { 
@@ -126,7 +125,13 @@ header {
     background-color: #888888;
 }
 
-/* .menu-btn {
+@media (max-width: 690px) {
+  .navi a, .logout-btn {
+    margin-left: 10px;
+  }
+}
+
+.menu-btn {
   display: none;
   background: none;
   border: none;
@@ -148,7 +153,7 @@ header {
   .menu-btn.active + .navi {
     display: flex;
   }
-} */
+}
 
 footer {
     display: flex;
@@ -169,7 +174,6 @@ footer {
         flex-direction: column;
         align-items: center;
         text-align: center;
-        padding: 10px;
     }
 }
 

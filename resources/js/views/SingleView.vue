@@ -43,7 +43,7 @@ const formatDate = (dateString) => {
 
     <div class="container">
 
-        <div class="form-wrapper">
+        <div class="form-wrap">
             <div class="top">
               <div class="tweet-date">TWEET VOM {{ formatDate(post.created_at) }}</div>
 
@@ -74,13 +74,24 @@ const formatDate = (dateString) => {
   justify-content: center;
 }
 
-.form-wrapper  {
+.form-wrap  {
   width: 768px;
   height: fit-content;
   display: flex;
   flex-direction: column;
   margin-bottom: 8px;
 }
+
+@media (max-width: 768px) {
+  .form-wrap{
+    max-width: 768px;
+    width: 100%;
+    margin-bottom: 8px;
+  }
+  .container {
+    margin: 0 10px;
+  }
+}  
 
 .top {
   display: flex;

@@ -3,13 +3,14 @@
 import { ref, onMounted } from 'vue';
 import { authClient } from '@/store/AuthStore';
 
-import { useRoute } from 'vue-router';
+import { useRoute } from 'vue-router';  // useRouter
 
 import router from "@/router"
+// const router = useRouter()
 
 import PostButtonDelete from '../components/Button/PostButtonDelete.vue';
-import SubmitButtonUpdate from '../components/Button/SubmitButtonUpdate.vue';
-import AbortButton from '../components/Button/AbortButton.vue';
+import SubmitButton from '../components/Button/SubmitButton.vue';
+import AbortButton from '@/components/Button/AbortButton.vue';
 
 const route = useRoute()
 const post_id = route.params.id
@@ -67,7 +68,7 @@ const handleUpdate = async (id) => {
               <AbortButton text="Abbrechen" />
         </div>
 
-        <div class="form-wrapper">
+        <div class="form-wrap">
             <div v-if="alertMessage">{{ alertMessage }}</div>
             <form action="" method="POST" @submit.prevent="$event=>handleUpdate(post_id)">
                 <div class="form-group">
@@ -79,7 +80,7 @@ const handleUpdate = async (id) => {
                     <textarea id="content" name="content" rows="5" v-model="content"></textarea>
                 </div>
                 <div class="btns">
-                  <SubmitButtonUpdate>Tweet updaten</SubmitButtonUpdate>
+                  <SubmitButton>Tweet updaten</SubmitButton>
                   <PostButtonDelete type="button" :post_id="post_id" />
                 </div>  
             </form>
@@ -98,7 +99,8 @@ const handleUpdate = async (id) => {
 }
 
 .text-wrapper {
-  width: 768px; /* Gleiche Breite wie der form-wrapper */
+  max-width: 768px; /* Gleiche Breite wie der form-wrapper */
+  width: 100%;
   text-align: left;
   margin-bottom: 60px;
   display: flex;
@@ -123,9 +125,10 @@ p {
 }
 
 /* Der Rahmen um das Formular */
-.form-wrapper {
+.form-wrap {
   background-color: #FFFFFF;
   max-width: 768px;
+  width: 100%;
   max-height: 444px;
   border-radius: 4px;
   border: solid 1px #F1F1F1;
@@ -149,12 +152,18 @@ p {
 }
 
 input[type="text"], textarea {
-  width: 680px;
+  width: 100%;
   padding: 10px;
   border: 1px solid #999999;
   border-radius: 4px;
   font-size: 16px;
 }
+
+@media (max-width: 768px) {
+  .container {
+    margin: 0 10px;
+  }
+}  
 
 .btns {
   display: flex;

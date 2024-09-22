@@ -79,9 +79,30 @@ onMounted(() => {
   text-align: left;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   margin-bottom: 37px;
 }
+
+@media (max-width: 768px) {
+  .text-wrapper {
+    width: 100%; /* Breite auf 100% des Bildschirms setzen */
+    max-width: 768px;
+    margin: 0 10px;
+    margin-bottom: 37px;
+  }
+  .container {
+    margin: 0 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .text-wrapper {
+    width: 100%;
+    font-size: 14vw;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+  }
+}  
 
 h3 {
   font-size: 32px;

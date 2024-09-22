@@ -39,7 +39,7 @@ const handleRegister = async () => {
             <p>Join now!</p>
         </div>    
 
-        <div class="form-wrapper">
+        <div class="form-wrap">
             <form action="" method="POST" @submit.prevent="handleRegister">
                 <div class="form-group register">Registrieren</div>
                 <div class="form-group">
@@ -82,7 +82,8 @@ const handleRegister = async () => {
 }
 
 .text-wrapper {
-  width: 768px; /* Gleiche Breite wie der form-wrapper */
+  max-width: 768px; /* Gleiche Breite wie der form-wrapper */
+  width: 100%;
   text-align: left;
 }
 
@@ -103,9 +104,10 @@ p {
 }
 
 /* Der Rahmen um das Formular */
-.form-wrapper {
+.form-wrap {
   background-color: #FFFFFF;
   max-width: 768px;
+  width: 100%;
   min-height: 444px;
   border-radius: 4px;
   border: solid 1px #F1F1F1;
@@ -114,6 +116,12 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+}
+
+@media (max-width: 768px) {
+  .container {
+    margin: 0 10px;
+  }
 }
 
 .form-group {
@@ -137,7 +145,7 @@ p {
 }
 
 input[type="text"], input[type="password"], textarea {
-  width: 680px;
+  width: 100%;
   padding: 10px;
   border: 1px solid #999999;
   border-radius: 4px;
